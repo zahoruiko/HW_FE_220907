@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+        aside {
+            display:contents;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #b2bbd6;
+            padding: 30px;
+            margin: 0;
+            display: flex;
+            justify-content: left;
+        }
+        #wrapper {
+            width: 1024px;
+            display: flex;
+            justify-content: left;
+            flex-direction: row;
+        }
+        #nav-panel {
+            width: 140px;
+            background-color: #f9f9f9;
+            height: 90vh;
+            position: fixed;
+        }
+        #nav-panel__site-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 30px 20px 20px;
+        }
+        #site-logo__image-wrapper {
+            display: flex;
+            vertical-align: bottom;
+            padding-right: 5px;
+        }
+        #site-logo__img {
+            height: 20px;
+        }
+        #site-logo__title-wrapper {
+            font-size: 20px;
+            font-weight: bold;
+            padding-bottom: 6px;
+        }
+        #main-menu {
+            padding-top: 50px;
+        }
+        .main-menu__item {
+            padding: 5px 10px 5px 40px;
+            border-left: 3px solid #f9f9f9;
+            font-size: 10px;
+            color: #888;
+            margin: 10px 0 10px 0;
+        }
+        .main-menu__item:hover {
+            border-left: 3px solid gray;
+            color: #333;
+            transition: all 0.3s ease-out;
+            cursor: pointer;
+        }
+        #logout {
+            position: absolute;
+            bottom: 30px;
+            left: 0px;
+            padding: 5px 10px 5px 40px;
+            border-left: 3px solid #f9f9f9;
+            font-size: 10px;
+            color: #888;
+            margin: 10px 0 0px 0;
+        }
+        #logout:hover {
+            border-left: 3px solid gray;
+            color: #333;
+            transition: all 0.3s ease-out;
+            cursor: pointer;
+        }
+        .main-menu__icon--size {
+            font-size: 12px;
+        }
+
+        #courses {
+            position: relative;
+            width: 500px;
+            background-color: white;
+            height: 100%;
+            left: 140px;
+            display: flex;
+            flex-direction: column;
+        }        
+        #user-info-wrapper {
+            padding-left: 20px;
+            display: flex;
+            align-items: center;
+        }
+        #user__avatar__size {
+            font-size: 28px;
+            background-color: lightskyblue;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            margin-right: 10px;
+        }
+        #user-info__name {
+            font-size: 13px;
+            font-weight: bold;
+        }
+        #user-info__location {
+            font-size: 9px;
+            color: #666;
+        }
+        #courses-user__wrapper {
+            display: flex;
+            justify-content:space-between;
+            align-items: center;
+            height: 50px;
+            margin-top: 25px;
+            width: 100%;
+        }
+        #courses__search {
+            padding-right: 30px;
+        }
+        .search-form__input {
+            padding: 1px;
+            border: 1px solid #eee;
+        }
+        input::placeholder {
+            font: 8px sans-serif;
+            padding-left: 25px;
+        }
+        #search-form__button {
+            background-color: #333;
+            color: #fff;
+            font-weight: bold;
+            margin: 0;
+            border: none;
+            padding: 2px;
+            width: 25px;
+            cursor: pointer;
+        }
+        #courses-header__wrapper {
+            display: flex;
+            justify-content:space-between;
+            padding-left: 20px;
+            margin-top: 30px;
+        }
+        #courses-menu__header {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        #courses-menu__show-all {
+            font-size: 8px;
+            padding-right: 30px;
+        }
+        #courses-menu {
+            display: flex;
+            padding-left: 12px;
+        }
+        .courses-menu__item {
+            padding: 10px 0px 10px 10px;
+            font-size: 9px;
+            color: #999;
+        }
+        .courses-menu__item:hover {
+            color: #000;
+            transition: all 0.3s ease-out;
+            cursor: pointer;
+        }
+        #courses-list {
+            display: flex;
+            flex-direction: column;
+            margin-left: 17px;
+        }
+        .courses-list__item {
+            width: 92%;
+            border: 1px solid lightgray;
+            margin: 4px;
+            padding: 0px;
+            display: flex;
+        }
+        .courses-list__item:hover {
+            background-color: #eee;
+            border: 1px solid #666;
+            transition: all 0.3s ease-out;
+            cursor: pointer;
+        }
+        .course-item-img__wrapper {
+            height: 100%;
+            width: 180px;
+            display: flex;
+            align-items: center;
+        }
+        .course-item-img__wrapper>img {
+            width: 180px;
+            height: 110px;
+        }
+        .course-item-info__wrapper {
+            display: flex;
+            padding-top: 15px;
+            flex-direction: column;
+            margin-left: 20px;
+        }
+        .course-item__title>h2 {
+            font-size: 18px;
+            padding: 0;
+            margin-bottom: 10px;
+        }
+        .course-item__theme-and-date {
+            font-size: 8px;
+            color: #666;
+            margin-bottom: 0px;
+            padding: 0;
+        }
+
+        #shedule {
+            width: 330px;
+            background-color: white;
+            position: relative;
+            left: 140px;
+            height: 100%;
+            border-left: 1px solid #eee;
+        }
+        #calendar {
+            display: flex;
+            flex-direction: column;
+        }
+        #shedule-header {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 30px 10px 25px;
+        }
+        #shedule-header__title {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        #shedule-month-selector {
+            border: 1px solid #eee;
+            background-color: white;
+            color: #555;
+            cursor: pointer;
+        }
+        #calendar-output {
+            margin-left: 20px;
+            width: 90%;
+            font-size: 9px;
+        }
+        #calendar-output tr {
+            text-align: right;
+            height: 30px;
+            font-size: 11px;
+        }
+        #calendar-output th {
+            padding-right: 15px;
+        }
+        #calendar-output th:hover {
+            padding-right: 15px;
+            background-color: #eee;
+            transition: all 0.3s ease-out;
+            cursor: pointer;
+        }
+        #calendar-output td {
+            width: 15px;
+            padding-right: 15px;
+        }
+        #calendar-output td:hover {
+            background-color: #000;
+            color: #fff;
+            font-weight: bold;
+            transition: all 0.3s ease-out;
+            cursor: pointer;
+        }
+        .calendar-output__selected-month {
+            color: #444;
+        }
+        .calendar-output__other-month {
+            color: lightgray;
+        }
+        #events-list {
+            display: flex;
+            flex-direction: column;
+        }
+        #events-list__wrapper {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 30px;
+        }
+        #events-list-header__wrapper {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        #events-list-header__menu {
+            color: #555;
+        }
+        #events-list-header__menu:hover {
+            cursor: pointer;
+        }
+        #events-list {
+            display: flex;
+            flex-direction: column;
+            margin-right: 20px;
+        }
+        .events-list__item {
+            display: flex;
+            margin: 0px 20px 0px 5px;
+        }
+        .events-list__item:hover {
+            display: flex;
+            margin: 0px 20px 0px 5px;
+            background-color: #eee;
+            transition: all 0.3s ease-out;
+            cursor: pointer;
+        }
+        .events-list__item-time {
+            display: flex;
+            font-size: 12px;
+            color: #555;
+            justify-content: center;
+            align-items: top;
+            width: 50px;
+            min-width: 50px;
+            padding: 5px;
+            margin-right: 5px;
+        }
+        .events-list__item-content {
+            display: flex;
+            justify-content: left;
+            margin: 5px 0px 5px 0px;
+            width: 100%;
+        }
+        .events-list__item-content-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            min-width: 30px;
+            height: 30px;
+            min-height: 30px;
+            background-color: yellow;
+        }
+        .events-list__item-content-text {
+            display: flex;
+            flex-direction: column;
+            margin-left: 10px;
+        }
+        .events-list__item-time-limit {
+            display: flex;
+            color: #555;
+            font-size: 8px;
+        }
+        .events-list__item-title {
+            color: #555;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .events-list__empty-item {
+            height: 8px;
+            width: 100%;
+            margin-right: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .events-list__empty-item-wrapper {
+            width: 100%;
+            height: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <aside>
+            <div id="nav-panel">
+                <div id="nav-panel__site-logo">
+                    <div id="site-logo__image-wrapper">
+                        <img src="images/site-logo.png" alt="momo" title="momo" id="site-logo__img">
+                    </div>
+                    <div id="site-logo__title-wrapper">
+                        memo
+                    </div>
+                </div>
+                <div id="main-menu">
+                    <div class="main-menu__item">
+                        <span class="main-menu__icon--size"><i class="las la-school"></i></span>
+                        Courses
+                    </div>
+                    <div class="main-menu__item">
+                        <span class="main-menu__icon--size"><i class="las la-credit-card"></i></span>
+                        Payment
+                    </div>
+                    <div class="main-menu__item">
+                        <span class="main-menu__icon--size"><i class="las la-comment-dots"></i></span>
+                        Chat
+                    </div>
+                    <div class="main-menu__item">
+                        <span class="main-menu__icon--size"><i class="las la-users"></i></span>
+                        Groups</div>
+                    <div class="main-menu__item">
+                        <span class="main-menu__icon--size"><i class="las la-graduation-cap"></i></i></span>
+                        Students
+                    </div>
+                    <div class="main-menu__item">
+                        <span class="main-menu__icon--size"><i class="las la-life-ring"></i></span>
+                        Support
+                    </div>
+                </div>
+                <div id="logout">
+                    <div class="logout__img">
+                        <span class="main-menu__icon--size"><i class="las la-sign-out-alt"></i></span>
+                        Logout
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main>
+            <div id="courses">
+                <div id="courses-user__wrapper">
+                    <div id="user-info-wrapper">
+                        <div class="user-avatar__wrapper">
+                            <div id="user__avatar__size">
+                                <i class="las la-user"></i>
+                            </div>
+                        </div>
+                        <div class="user-info__wrapper">
+                            <div id="user-info__name">
+                                Leslie Alexander
+                            </div>
+                            <div id="user-info__location">
+                                Los Angeles, CA
+                            </div>
+                        </div>    
+                    </div>
+                    <div id="courses__search">
+                        <form>
+                            <input class="search-form__input" type="text" placeholder="Search" size="10">
+                            <button id="search-form__button"><i class="las la-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="courses-header__wrapper">
+                    <div id="courses-menu__header">Courses</div>
+                    <div id="courses-menu__show-all">See all</div>
+                </div>
+
+                <div id="courses-menu">
+                    <span class="courses-menu__item">All</span>
+                    <span class="courses-menu__item">Current</span>
+                    <span class="courses-menu__item">Pending</span>
+                    <span class="courses-menu__item">Complited</span>
+                </div>
+
+                <div id="courses-list">
+                    <article class="courses-list__item">
+                        <div class="course-item-img__wrapper">
+                            <img src="images/course-item.png" alt="Course image">
+                        </div>
+                        <div class="course-item-info__wrapper">
+                            <div class="course-item__theme-and-date">Programming &bull; <time>Sep 09, 2022</time></div>
+                            <div class="course-item__title">
+                                <h2>Object-Oriented<br>Programming in Java</h2>
+                            </div>
+                        </div>  
+                    </article>
+
+                    <article class="courses-list__item">
+                        <div class="course-item-img__wrapper">
+                            <img src="images/course-item.png" alt="Course image">
+                        </div>
+                        <div class="course-item-info__wrapper">
+                            <div class="course-item__theme-and-date">Programming &bull; <time>Sep 09, 2022</time></div>
+                            <div class="course-item__title">
+                                <h2>Object-Oriented<br>Programming in Kotlin</h2>
+                            </div>
+                        </div>  
+                    </article>
+
+                    <article class="courses-list__item">
+                        <div class="course-item-img__wrapper">
+                            <img src="images/course-item.png" alt="Course image">
+                        </div>
+                        <div class="course-item-info__wrapper">
+                            <div class="course-item__theme-and-date">Programming &bull; <time>Sep 09, 2022</time></div>
+                            <div class="course-item__title">
+                                <h2>Object-Oriented<br>Programming in Python</h2>
+                            </div>
+                        </div>  
+                    </article>
+
+                    <article class="courses-list__item">
+                        <div class="course-item-img__wrapper">
+                            <img src="images/course-item.png" alt="Course image">
+                        </div>
+                        <div class="course-item-info__wrapper">
+                            <div class="course-item__theme-and-date">Programming &bull; <time>Sep 09, 2022</time></div>
+                            <div class="course-item__title">
+                                <h2>Object-Oriented<br>Programming in C++</h2>
+                            </div>
+                        </div>  
+                    </article>
+                </div>
+            </div>
+        </main>
+        
+        <aside>
+            <div id="shedule">
+                <section>
+                    <div id="shedule-header">
+                        <div id="shedule-header__title">
+                            Schedule
+                        </div>
+                        <div id="shedule-header__month-selector">
+                            <form>
+                                <select name="months" id="shedule-month-selector">
+                                    <option value="0">Month</option>
+                                    <option value="1">Januar</option>
+                                    <option value="2">Februar</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">Mai</option>
+                                    <option value="6">Juni</option>
+                                    <option value="7">Juli</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">Dezember</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                    <div id="calendar">
+                        <table id="calendar-output">
+                            <tr>
+                                <th>Sun</th>
+                                <th>Mon</th>
+                                <th>Tue</th>
+                                <th>Wed</th>
+                                <th>Thu</th>
+                                <th>Fri</th>
+                                <th>Sat</th>
+                            </tr>
+                            <tr>
+                                <td class="calendar-output__other-month">26</td>
+                                <td class="calendar-output__other-month">27</td>
+                                <td class="calendar-output__other-month">28</td>
+                                <td class="calendar-output__other-month">29</td>
+                                <td class="calendar-output__other-month">30</td>
+                                <td class="calendar-output__selected-month">1</td>
+                                <td class="calendar-output__selected-month">2</td>
+                            </tr>
+                            <tr>
+                                <td class="calendar-output__selected-month">3</td>
+                                <td class="calendar-output__selected-month">4</td>
+                                <td class="calendar-output__selected-month">5</td>
+                                <td class="calendar-output__selected-month">6</td>
+                                <td class="calendar-output__selected-month">7</td>
+                                <td class="calendar-output__selected-month">8</td>
+                                <td class="calendar-output__selected-month">9</td>
+                            </tr>
+                            <tr>
+                                <td class="calendar-output__selected-month">10</td>
+                                <td class="calendar-output__selected-month">11</td>
+                                <td class="calendar-output__selected-month">12</td>
+                                <td class="calendar-output__selected-month">13</td>
+                                <td class="calendar-output__selected-month">14</td>
+                                <td class="calendar-output__selected-month">15</td>
+                                <td class="calendar-output__selected-month">16</td>
+                            </tr>
+                            <tr>
+                                <td class="calendar-output__selected-month">17</td>
+                                <td class="calendar-output__selected-month">18</td>
+                                <td class="calendar-output__selected-month">19</td>
+                                <td class="calendar-output__selected-month">20</td>
+                                <td class="calendar-output__selected-month">21</td>
+                                <td class="calendar-output__selected-month">22</td>
+                                <td class="calendar-output__selected-month">23</td>
+                            </tr>
+                            <tr>
+                                <td class="calendar-output__selected-month">24</td>
+                                <td class="calendar-output__selected-month">25</td>
+                                <td class="calendar-output__selected-month">26</td>
+                                <td class="calendar-output__selected-month">27</td>
+                                <td class="calendar-output__selected-month">28</td>
+                                <td class="calendar-output__selected-month">29</td>
+                                <td class="calendar-output__selected-month">30</td>
+                            </tr>
+                        </table>
+                    </div>
+                </section>
+                <section>
+                    <div id="events-list__wrapper">
+                        <div id="events-list-header__wrapper">
+                            <div id="events-list__header">
+                                Upcomming
+                            </div>
+                            <div id="events-list-header__menu">
+                                <b>...</b>
+                            </div>
+                        </div>
+                        <div id="events_list">
+                            <div>
+                                <div class="events-list__item">
+                                    <div class="events-list__item-time">
+                                        <time>09:00</time>
+                                    </div>
+                                    <div class="events-list__item-content">
+                                        <div class="events-list__empty-item-wrapper">
+                                            <div class="events-list__empty-item"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="events-list__item">
+                                    <div class="events-list__item-time">
+                                        <time>10:00</time>
+                                    </div>
+                                    <div class="events-list__item-content">
+                                        <div class="events-list__item-content-image">
+                                            <i class="las la-bell"></i>
+                                        </div>
+                                        <div class="events-list__item-content-text">
+                                            <div class="events-list__item-time-limit">
+                                                <time>10:00 - 11:00</time>
+                                            </div>
+                                            <div class="events-list__item-title">
+                                                Graph QL
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="events-list__item">
+                                    <div class="events-list__item-time">
+                                        <time>11:00</time>
+                                    </div>
+                                    <div class="events-list__item-content">
+                                        <div class="events-list__empty-item-wrapper">
+                                            <div class="events-list__empty-item"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="events-list__item">
+                                    <div class="events-list__item-time">
+                                        <time>12:00</time>
+                                    </div>
+                                    <div class="events-list__item-content">
+                                        <div class="events-list__empty-item-wrapper">
+                                            <div class="events-list__empty-item"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+        
+                                <div class="events-list__item">
+                                    <div class="events-list__item-time">
+                                        <time>13:00</time>
+                                    </div>
+                                    <div class="events-list__item-content">
+                                        <div class="events-list__item-content-image">
+                                            <i class="las la-bell"></i>
+                                        </div>
+                                        <div class="events-list__item-content-text">
+                                            <div class="events-list__item-time-limit">
+                                                <time>10:00 - 11:00</time>
+                                            </div>
+                                            <div class="events-list__item-title">
+                                                Programming in Java & Kotlin<br>Lorem ipsum dolor sit amet, consectetur adipisicing 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="events-list__item">
+                                    <div class="events-list__item-time">
+                                        <time>14:00</time>
+                                    </div>
+                                    <div class="events-list__item-content">
+                                        <div class="events-list__empty-item-wrapper">
+                                            <div class="events-list__empty-item"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="events-list__item">
+                                    <div class="events-list__item-time">
+                                        <time>15:00</time>
+                                    </div>
+                                    <div class="events-list__item-content">
+                                        <div class="events-list__empty-item-wrapper">
+                                            <div class="events-list__empty-item"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="events-list__item">
+                                    <div class="events-list__item-time">
+                                        <time>16:00</time>
+                                    </div>
+                                    <div class="events-list__item-content">
+                                        <div class="events-list__item-content-image">
+                                            <i class="las la-bell"></i>
+                                        </div>
+                                        <div class="events-list__item-content-text">
+                                            <div class="events-list__item-time-limit">
+                                                <time>10:00 - 11:00</time>
+                                            </div>
+                                            <div class="events-list__item-title">
+                                                Computer science
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="events-list__item">
+                                    <div class="events-list__item-time">
+                                        <time>17:00</time>
+                                    </div>
+                                    <div class="events-list__item-content">
+                                        <div class="events-list__empty-item-wrapper">
+                                            <div class="events-list__empty-item"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </aside>
+    </div>
+</body>
+</html>
